@@ -54,24 +54,9 @@ int main()
 		
 		while(1) {
 		_delay_ms(500);
-	if((bit_is_clear(PINC, 4)) && (last_pos == 0)) { // check if switch is pressed (located at bit 4 of PINC) and if we are in the correct position
+	if((bit_is_clear(PINC, 4)) && (last_pos != 5))  { // check if switch is pressed (located at bit 4 of PINC) and if we are in the correct position
 		
 		last_pos = get_pos(PINB, PIND, last_pos);
-		
-			
-	} else if ((bit_is_clear(PINC, 4)) && (last_pos == 1)) { 
-		last_pos = get_pos(PINB, PIND, last_pos);
-			
-	
-	} else if ((bit_is_clear(PINC, 4)) && (last_pos == 2)) {
-		last_pos = get_pos(PINB, PIND, last_pos);
-		
-	} else if ((bit_is_clear(PINC, 4)) && (last_pos == 3)) {
-		last_pos = get_pos(PINB, PIND, last_pos);
-		
-		} else if ((bit_is_clear(PINC, 4)) && (last_pos == 4)) {
-			
-			last_pos = get_pos(PINB, PIND, last_pos);
 			
 		} else if ((bit_is_clear(PINC, 4)) && (last_pos == 5)) {
 			
@@ -127,12 +112,12 @@ void red_LED(){ // same as green_LED
 	PORTC ^= 0b11111011;
 	_delay_ms(1000);
 }
-int get_pos(volatile PIN_B,volatile PIN_D, int last_pos) {
+int get_pos(volatile PIN_B, volatile PIN_D, int last_pos) {
 	int temp_last_pos = last_pos;
 	int temp = temp_last_pos;
 	switch (temp) {
 		case 0 : 
-			if (((PIND & position_D_mask) == (position_one_D & position_D_mask)) && ((PINB & position_B_mask) == (position_one_B & position_B_mask))) {
+			if (((PIN_D & position_D_mask) == (position_one_D & position_D_mask)) && ((PIN_B & position_B_mask) == (position_one_B & position_B_mask))) {
 			temp_last_pos = 1; // switch position so that if can check if we are in the next step
 			shortbuzz();
 			} else {
@@ -141,7 +126,7 @@ int get_pos(volatile PIN_B,volatile PIN_D, int last_pos) {
 		break;
 		
 		case 1 : 
-			if(((PIND & position_D_mask) == (position_two_D & position_D_mask)) && ((PINB & position_B_mask) == (position_two_B & position_B_mask))) {
+			if(((PIN_D & position_D_mask) == (position_two_D & position_D_mask)) && ((PIN_B & position_B_mask) == (position_two_B & position_B_mask))) {
 			temp_last_pos = 2;
 			shortbuzz();
 			} else {
@@ -150,7 +135,7 @@ int get_pos(volatile PIN_B,volatile PIN_D, int last_pos) {
 		break;
 		
 		case 2 : 
-			if(((PIND & position_D_mask) == (position_three_D & position_D_mask)) && ((PINB & position_B_mask) == (position_three_B & position_B_mask))) {
+			if(((PIN_D & position_D_mask) == (position_three_D & position_D_mask)) && ((PIN_B & position_B_mask) == (position_three_B & position_B_mask))) {
 			temp_last_pos = 3;
 			shortbuzz();
 			} else {
@@ -160,7 +145,7 @@ int get_pos(volatile PIN_B,volatile PIN_D, int last_pos) {
 		break;
 	    
 		case 3 : 
-			if(((PIND & position_D_mask) == (position_four_D & position_D_mask)) && ((PINB & position_B_mask) == (position_four_B & position_B_mask))) {
+			if(((PIN_D & position_D_mask) == (position_four_D & position_D_mask)) && ((PIN_B & position_B_mask) == (position_four_B & position_B_mask))) {
 				temp_last_pos = 4;
 				shortbuzz();
 				} else {
@@ -170,7 +155,7 @@ int get_pos(volatile PIN_B,volatile PIN_D, int last_pos) {
 			break;
 		
 		case 4 : 
-			if(((PIND & position_D_mask) == (position_five_D & position_D_mask)) && ((PINB & position_B_mask) == (position_five_B & position_B_mask))) {
+			if(((PIN_D & position_D_mask) == (position_five_D & position_D_mask)) && ((PIN_B & position_B_mask) == (position_five_B & position_B_mask))) {
 				temp_last_pos = 5;
 				shortbuzz();
 				} else {
@@ -180,7 +165,7 @@ int get_pos(volatile PIN_B,volatile PIN_D, int last_pos) {
 		break;
 		
 		case 5 : 
-			if(((PIND & position_D_mask) == (position_six_D & position_D_mask)) && ((PINB & position_B_mask) == (position_six_B & position_B_mask))) {
+			if(((PIN_D & position_D_mask) == (position_six_D & position_D_mask)) && ((PIN_B & position_B_mask) == (position_six_B & position_B_mask))) {
 				temp_last_pos = 0;
 				
 				} else {
